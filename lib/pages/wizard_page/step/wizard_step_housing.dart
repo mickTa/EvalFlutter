@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:green_track/res/app_colors.dart';
 import 'package:green_track/res/app_icons.dart';
 
+
+/// Widgets à utiliser :
+/// - [FilledButton]
+/// - [TextField]
+  /// - [RadioGroup] avec [Radio] (regarder la doc de [RadioListTile])
+enum ChauffageType { bois, gaz, electrique }
 class WizardStepHousing extends StatefulWidget {
   const WizardStepHousing({
     super.key,
@@ -18,6 +24,7 @@ class WizardStepHousing extends StatefulWidget {
 
 class _WizardStepHousingState extends State<WizardStepHousing> {
   bool _isAppartement = true;
+  ChauffageType? _chauffage;
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +250,278 @@ class _WizardStepHousingState extends State<WizardStepHousing> {
                         ),
                       ),
                     ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.secondary,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Icon(
+                        AppIcons.heating,
+                        color: AppColors.primary,
+                        size: 20,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    const Text(
+                      'Source de chauffage : ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'PlusJakartaSans',
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.cardBackground,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Type :',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'PlusJakartaSans',
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () => setState(() => _chauffage = ChauffageType.bois ),
+                            child: Container(
+                              height: 41,
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              decoration: BoxDecoration(
+                                color: _chauffage == ChauffageType.bois
+                                    ? AppColors.secondary
+                                    : AppColors.white,
+                                borderRadius: BorderRadius.circular(50),
+                                border: _chauffage == ChauffageType.bois
+                                    ? Border.all(
+                                  color: AppColors.primaryDark,
+                                  width: 2,
+                                )
+                                    : null,
+                                boxShadow: _chauffage == ChauffageType.bois
+                                    ? null
+                                    : [
+                                  const BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.1),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+
+                                  Text(
+                                    'Bois',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'PlusJakartaSans',
+                                      color: _chauffage == ChauffageType.bois
+                                          ? AppColors.primaryDark
+                                          : AppColors.primary,
+                                    ),
+                                  ),
+
+                                  if (_chauffage == ChauffageType.bois)
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primaryDark,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.check,
+                                        size: 14,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  else
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.primary,
+                                          width: 2,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          GestureDetector(
+                            onTap: () => setState(() => _chauffage == ChauffageType.gaz),
+                            child: Container(
+                              height: 41,
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              decoration: BoxDecoration(
+                                color:  _chauffage == ChauffageType.gaz
+                                    ? AppColors.secondary
+                                    : AppColors.white,
+                                borderRadius: BorderRadius.circular(50),
+                                border:  _chauffage == ChauffageType.gaz
+                                    ? Border.all(
+                                  color: AppColors.primaryDark,
+                                  width: 2,
+                                )
+                                    : null,
+                                boxShadow:  _chauffage == ChauffageType.gaz
+                                    ? null
+                                    : [
+                                  const BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.1),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+
+                                  Text(
+                                    'Gaz',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'PlusJakartaSans',
+                                      color:  _chauffage == ChauffageType.gaz
+                                          ? AppColors.primaryDark
+                                          : AppColors.primary,
+                                    ),
+                                  ),
+
+                                  if ( _chauffage == ChauffageType.gaz)
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primaryDark,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.check,
+                                        size: 14,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  else
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.primary,
+                                          width: 2,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          GestureDetector(
+                            onTap: () => setState(() =>  _chauffage == ChauffageType.electrique),
+                            child: Container(
+                              height: 41,
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              decoration: BoxDecoration(
+                                color: _chauffage == ChauffageType.electrique
+                                    ? AppColors.secondary
+                                    : AppColors.white,
+                                borderRadius: BorderRadius.circular(50),
+                                border: _chauffage == ChauffageType.electrique
+                                    ? Border.all(
+                                  color: AppColors.primaryDark,
+                                  width: 2,
+                                )
+                                    : null,
+                                boxShadow: _chauffage == ChauffageType.electrique
+                                    ? null
+                                    : [
+                                  const BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.1),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+
+                                  Text(
+                                    'Electrique',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'PlusJakartaSans',
+                                      color: _chauffage == ChauffageType.electrique
+                                          ? AppColors.primaryDark
+                                          : AppColors.primary,
+                                    ),
+                                  ),
+
+                                  if (_chauffage == ChauffageType.electrique)
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primaryDark,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.check,
+                                        size: 14,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  else
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.primary,
+                                          width: 2,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

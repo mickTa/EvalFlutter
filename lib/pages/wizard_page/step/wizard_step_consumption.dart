@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:green_track/res/app_colors.dart';
 import 'package:green_track/res/app_icons.dart';
 
+/// Widgets à utiliser :
+/// - [Slider]
+/// - [FilledButton]
 class WizardStepConsumption extends StatefulWidget {
   const WizardStepConsumption({
     super.key,
