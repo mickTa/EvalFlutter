@@ -1,1 +1,0 @@
- C:\\Users\\micka\\Documents\\EvalFlutter\\esilv_template_exam\\lib\\l10n\\app_localizations_fr.dart C:\\Users\\micka\\Documents\\EvalFlutter\\esilv_template_exam\\lib\\l10n\\app_localizations.dart:  C:\\Users\\micka\\Documents\\EvalFlutter\\esilv_template_exam\\l10n.yaml C:\\Users\\micka\\Documents\\EvalFlutter\\esilv_template_exam\\lib\\l10n\\app_fr.arb

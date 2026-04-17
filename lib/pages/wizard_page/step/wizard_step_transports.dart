@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:green_track/res/app_colors.dart';
 
-/// Widgets à utiliser :
-/// - [FilledButton]
 class CustomSlider extends StatefulWidget {
   final double valeur;
   final double maxValeur;
@@ -19,17 +17,6 @@ class CustomSlider extends StatefulWidget {
   @override
   _CustomSliderState createState() => _CustomSliderState();
 }
-import 'package:green_track/res/app_colors.dart';
-
-class WizardStepTransports extends StatelessWidget {
-  const WizardStepTransports({
-    super.key,
-    required this.onNext,
-    required this.onBack,
-  });
-
-  final VoidCallback onNext;
-  final VoidCallback onBack;
 
 class _CustomSliderState extends State<CustomSlider> {
   @override
@@ -44,9 +31,15 @@ class _CustomSliderState extends State<CustomSlider> {
   }
 }
 
-
 class WizardStepTransports extends StatefulWidget {
-  const WizardStepTransports({super.key});
+  const WizardStepTransports({
+    super.key,
+    required this.onNext,
+    required this.onBack,
+  });
+
+  final VoidCallback onNext;
+  final VoidCallback onBack;
 
   @override
   _WizardStepTransportsState createState() => _WizardStepTransportsState();
@@ -71,61 +64,66 @@ class _WizardStepTransportsState extends State<WizardStepTransports> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Déplacements",
-            style: TextStyle(
-              color: AppColors.primaryDark,
-              fontSize: 26,
-              fontWeight: FontWeight.w900,
-              height: 33 / 26,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.cardBackground,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            
-            child: Column(
-              children: [
-                Text("Kilomètres/an : ${_valeurSlider.round()}"),
-                CustomSlider(
-                  valeur: _valeurSlider,
-                  maxValeur: maxValeur,
-                  onChanged: (double value) {
-                    setState(() {
-                      _valeurSlider = value;
-                    });
-                    
-                  },
-                ),
-                Text("Passagers en moyenne :"),
-
-                Row(children: [
-                  FilledButton(onPressed: () {  }, child: Text("1")
-                  ),
-                  FilledButton(onPressed: () {  }, child: Text("2")),
-                  FilledButton(onPressed: () {  }, child: Text("3")),
-                  FilledButton(onPressed: () {  }, child: Text("4")),
-                  FilledButton(onPressed: () {  }, child: Text("5+"))
-
-                ],),
-              ],
     return Column(
       children: [
-        const Expanded(child: Placeholder()),
-        _BottomNavigationBar(onNext: onNext, onBack: onBack),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Déplacements",
+                  style: TextStyle(
+                    color: AppColors.primaryDark,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w900,
+                    height: 33 / 26,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.cardBackground,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    children: [
+                      Text("Kilomètres/an : ${_valeurSlider.round()}"),
+                      CustomSlider(
+                        valeur: _valeurSlider,
+                        maxValeur: maxValeur,
+                        onChanged: (double value) {
+                          setState(() {
+                            _valeurSlider = value;
+                          });
+                        },
+                      ),
+                      const Text("Passagers en moyenne :"),
+                      Row(
+                        children: [
+                          FilledButton(onPressed: () {}, child: const Text("1")),
+                          FilledButton(onPressed: () {}, child: const Text("2")),
+                          FilledButton(onPressed: () {}, child: const Text("3")),
+                          FilledButton(onPressed: () {}, child: const Text("4")),
+                          FilledButton(onPressed: () {}, child: const Text("5+")),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        _BottomNavigationBar(
+          onNext: widget.onNext,
+          onBack: widget.onBack,
+        ),
       ],
     );
   }
 }
-
 class _BottomNavigationBar extends StatelessWidget {
   const _BottomNavigationBar({required this.onNext, required this.onBack});
 
